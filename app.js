@@ -16,20 +16,27 @@ const app = Vue.createApp({
         },
         playerBarStyles() {
             return {width: this.playerHealth + '%'}
+        },
+        isCountLessThanThree() {
+            return  this.roundCounter < 3;
         }
     },
     methods: {
         attackMonster(){
             const attackValue = getRandomValue(5, 12);
             this.monsterHealth -= attackValue;
-            console.log('Monster HP : ' + this.monsterHealth);
-
             this.attackPlayer();
+            this.roundCounter++;
+
         },
         attackPlayer() {
             const attackValue = getRandomValue(8, 15);
             this.playerHealth -= attackValue;
-            console.log('Player HP :  ' + this.playerHealth);
+        },
+        specialAttackMonster(){
+            const attackValue = getRandomValue(10, 20);
+            this.monsterHealth -= attackValue;
+            this.roundCounter = 0;
         }
     }
 });
